@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/padding"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+
+
+    <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+        android:id="@+id/CountrySpinnerId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        app:BoarderColor="@color/colorPrimary"
+        app:BordersSize="@dimen/border"
+        app:RevealEmptyText="@string/country"
+        app:RevealViewBackgroundColor="@color/colorAccent"
+        app:SearchViewBackgroundColor="@android:color/secondary_text_dark"
+        app:ShowBorders="true"
+        app:StartSearchTintColor="@android:color/white"
+        app:SpinnerExpandHeight="@dimen/SpinnerHeight" />
+
+    <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+        android:id="@+id/ZoneSpinnerId"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        app:DividerHeight="@dimen/DividerHeight"
+        app:BoarderColor="@color/colorPrimary"
+        app:BordersSize="@dimen/border"
+        app:DoneSearchTintColor="@android:color/holo_purple"
+        app:ItemsDivider="@color/colorAccent"
+        app:RevealEmptyText="@string/zone"
+        app:RevealViewBackgroundColor="@color/colorAccent"
+        app:SearchViewBackgroundColor="@android:color/secondary_text_dark"
+        app:ShowBorders="true"
+        app:SpinnerExpandHeight="@dimen/SpinnerHeight"
+        app:StartSearchTintColor="@android:color/white" />
+
+    <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+        android:id="@+id/RegionAapterId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone"
+        app:BordersSize="@dimen/border"
+
+        app:DividerHeight="@dimen/DividerHeight"
+        app:BoarderColor="@color/colorPrimary"
+
+        app:DoneSearchTintColor="@android:color/holo_purple"
+        app:ItemsDivider="@color/colorPrimary"
+        app:RevealEmptyText="@string/region"
+        app:RevealViewBackgroundColor="@color/colorAccent"
+        app:SearchViewBackgroundColor="@android:color/secondary_text_dark"
+        app:ShowBorders="true"
+        app:SpinnerExpandHeight="@dimen/SpinnerHeight"
+        app:StartSearchTintColor="@android:color/white" />
+
+    <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+        android:id="@+id/AreaSpinnerId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        app:BordersSize="@dimen/border"
+        app:DividerHeight="@dimen/DividerHeight"
+        app:BoarderColor="@color/colorPrimary"
+
+        app:DoneSearchTintColor="@android:color/holo_purple"
+        app:ItemsDivider="@color/colorPrimary"
+        app:RevealEmptyText="@string/area"
+        app:RevealViewBackgroundColor="@color/colorAccent"
+        app:SearchViewBackgroundColor="@android:color/secondary_text_dark"
+        app:ShowBorders="true"
+        app:SpinnerExpandHeight="@dimen/SpinnerHeight"
+        app:StartSearchTintColor="@android:color/white" />
+
+
+    <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+        android:id="@+id/EmployeeSpinnerId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone"
+        app:DividerHeight="@dimen/DividerHeight"
+        app:BoarderColor="@color/colorPrimary"
+        app:BordersSize="@dimen/border"
+
+        app:DoneSearchTintColor="@android:color/holo_purple"
+        app:ItemsDivider="@color/colorAccent"
+        app:RevealEmptyText="@string/employee"
+        app:RevealViewBackgroundColor="@color/colorAccent"
+        app:SearchViewBackgroundColor="@android:color/secondary_text_dark"
+        app:ShowBorders="true"
+        app:SpinnerExpandHeight="@dimen/SpinnerHeight"
+        app:StartSearchTintColor="@android:color/white" />
+
+</LinearLayout>

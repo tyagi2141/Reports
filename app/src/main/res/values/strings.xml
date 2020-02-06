@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">JavaNestedExample</string>
+    <string name="country">Select Country</string>
+    <string name="zone">Select Zone</string>
+    <string name="region">Select Region</string>
+    <string name="employee">Select Employee</string>
+    <string name="area">Select Area</string>
+</resources>

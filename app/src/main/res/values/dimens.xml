@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="padding">16dp</dimen>
+    <dimen name="border">1dp</dimen>
+    <dimen name="SpinnerHeight">250dp</dimen>
+    <dimen name="DividerHeight">0.5dp</dimen>
+</resources>
