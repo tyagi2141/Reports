@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 
 @Entity
-class Example {
+class Result {
 
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

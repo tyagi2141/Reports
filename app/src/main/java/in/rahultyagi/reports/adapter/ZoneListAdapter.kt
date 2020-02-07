@@ -1,7 +1,7 @@
 package `in`.rahultyagi.reports.adapter
 
 import `in`.rahultyagi.reports.R
-import `in`.rahultyagi.reports.model.Area
+import `in`.rahultyagi.reports.model.Zone
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
@@ -13,63 +13,77 @@ import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
 import gr.escsoft.michaelprimez.searchablespinner.interfaces.ISpinnerSelectedView
 import gr.escsoft.michaelprimez.searchablespinner.tools.UITools
-import java.util.ArrayList
+import java.util.*
 
 
-class AreaListAdapter(private val mContext: Context, private var mAreaList: List<Area>) :
-    ArrayAdapter<Area>(mContext, R.layout.view_list_item), Filterable, ISpinnerSelectedView {
-    private val mBackupArray: List<Area> = mAreaList
-    private val mSearchFilter = StringFilter()
-
+class ZoneListAdapter(
+    private val mContext: Context,
+    strings: List<Zone>
+) :
+    ArrayAdapter<Zone?>(mContext, R.layout.view_list_item), Filterable,
+    ISpinnerSelectedView {
+    private val mBackupArray: List<Zone>
+    private var mZoneList: List<Zone>?
+    private val mStringFilter = StringFilter()
     override fun getCount(): Int {
-        return mAreaList.size + 1
+        return if (mZoneList == null) 0 else mZoneList!!.size + 1
     }
 
-    override fun getItem(position: Int): Area? {
-        return if (position > 0) {
-            mAreaList[position - 1]
+    override fun getItem(position: Int): Zone? {
+        return if (mZoneList != null && position > 0) {
+            mZoneList!![position - 1]
         } else {
             null
         }
     }
 
     override fun getItemId(position: Int): Long {
-        return -1
+        return if (mZoneList == null && position > 0) {
+            mZoneList!![position].hashCode().toLong()
+        } else -1
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+    override fun getView(
+        position: Int,
+        convertView: View?,
+        parent: ViewGroup
+    ): View {
         val view: View?
-
 
         if (position == 0) {
             view = noSelectionView
         } else {
             view = View.inflate(mContext, R.layout.view_list_item, null)
-            val letters = view!!.findViewById(R.id.ImgVw_Letters) as ImageView
-            val displayName = view.findViewById(R.id.TxtVw_DisplayName) as TextView
-            val displayTerriotry = view.findViewById(R.id.TxtVw_Terror) as TextView
-
-            letters.setImageDrawable(getTextDrawable(mAreaList[position - 1].area))
-            displayName.text = mAreaList[position - 1].area
-            displayTerriotry.text = mAreaList[position - 1].territory
+            val letters =
+                view.findViewById<View>(R.id.ImgVw_Letters) as ImageView
+            val displayName =
+                view.findViewById<View>(R.id.TxtVw_DisplayName) as TextView
+            val displayTerritory =
+                view.findViewById<View>(R.id.TxtVw_Terror) as TextView
+            letters.setImageDrawable(getTextDrawable(mZoneList!![position - 1].zone))
+            displayName.text = mZoneList!![position - 1].zone
+            displayTerritory.text = mZoneList!![position - 1].territory
         }
-        return view
+        return view!!
     }
 
     override fun getSelectedView(position: Int): View {
-        var view: View?
+        val view: View?
         if (position == 0) {
             view = noSelectionView
         } else {
             view = View.inflate(mContext, R.layout.view_list_item, null)
-            val letters = view!!.findViewById(R.id.ImgVw_Letters) as ImageView
-            val displayName = view.findViewById(R.id.TxtVw_DisplayName) as TextView
-            val displayTerriotry = view.findViewById(R.id.TxtVw_Terror) as TextView
-            letters.setImageDrawable(getTextDrawable(mAreaList[position - 1].area))
-            displayName.text = mAreaList[position - 1].area
-            displayTerriotry.text = mAreaList[position - 1].territory
+            val letters =
+                view.findViewById<View>(R.id.ImgVw_Letters) as ImageView
+            val displayName =
+                view.findViewById<View>(R.id.TxtVw_DisplayName) as TextView
+            val displayTerritory =
+                view.findViewById<View>(R.id.TxtVw_Terror) as TextView
+            letters.setImageDrawable(getTextDrawable(mZoneList!![position - 1].zone))
+            displayName.text = mZoneList!![position - 1].zone
+            displayTerritory.text = mZoneList!![position - 1].territory
         }
-        return view
+        return view!!
     }
 
     override fun getNoSelectionView(): View {
@@ -78,9 +92,9 @@ class AreaListAdapter(private val mContext: Context, private var mAreaList: List
 
     private fun getTextDrawable(displayName: String): TextDrawable? {
         val drawable: TextDrawable?
-        if (!TextUtils.isEmpty(displayName)) {
+        drawable = if (!TextUtils.isEmpty(displayName)) {
             val color2 = ColorGenerator.MATERIAL.getColor(displayName)
-            drawable = TextDrawable.builder()
+            TextDrawable.builder()
                 .beginConfig()
                 .width(UITools.dpToPx(mContext, 32f))
                 .height(UITools.dpToPx(mContext, 32f))
@@ -90,7 +104,7 @@ class AreaListAdapter(private val mContext: Context, private var mAreaList: List
                 .round()
                 .build(displayName.substring(0, 1), color2)
         } else {
-            drawable = TextDrawable.builder()
+            TextDrawable.builder()
                 .beginConfig()
                 .width(UITools.dpToPx(mContext, 32f))
                 .height(UITools.dpToPx(mContext, 32f))
@@ -102,11 +116,10 @@ class AreaListAdapter(private val mContext: Context, private var mAreaList: List
     }
 
     override fun getFilter(): Filter {
-        return mSearchFilter
+        return mStringFilter
     }
 
     inner class StringFilter : Filter() {
-
         @SuppressLint("DefaultLocale")
         override fun performFiltering(constraint: CharSequence): FilterResults {
             val filterResults = FilterResults()
@@ -115,9 +128,9 @@ class AreaListAdapter(private val mContext: Context, private var mAreaList: List
                 filterResults.values = mBackupArray
                 return filterResults
             }
-            val filterStrings = ArrayList<Area>()
+            val filterStrings: MutableList<Zone> = ArrayList()
             for (text in mBackupArray) {
-                if (text.area.toLowerCase().contains(constraint)) {
+                if (text.zone.toLowerCase().contains(constraint)) {
                     filterStrings.add(text)
                 }
             }
@@ -126,16 +139,22 @@ class AreaListAdapter(private val mContext: Context, private var mAreaList: List
             return filterResults
         }
 
-        override fun publishResults(constraint: CharSequence, results: FilterResults) {
-            mAreaList = results.values as ArrayList<Area>
+        override fun publishResults(
+            constraint: CharSequence,
+            results: FilterResults
+        ) {
+            mZoneList = results.values as ArrayList<Zone>
             if (results.count > 0) {
                 notifyDataSetChanged()
             } else {
                 notifyDataSetInvalidated()
             }
-
         }
     }
 
 
+    init {
+        mZoneList = strings
+        mBackupArray = strings
+    }
 }

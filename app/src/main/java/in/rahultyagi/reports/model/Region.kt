@@ -8,8 +8,6 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 class Region {
-    /* @PrimaryKey(autoGenerate = true)
-    public int id;*/
 
     @PrimaryKey
     @SerializedName("region")
@@ -20,10 +18,5 @@ class Region {
     @Expose
     var territory: String? = null
 
-    override fun toString(): String {
-        return "Region{" +
-                "region='" + region + '\''.toString() +
-                ", territory='" + territory + '\''.toString() +
-                '}'.toString()
-    }
+
 }

@@ -8,8 +8,6 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 class Employee {
-    /*  @PrimaryKey(autoGenerate = true)
-    public int id;*/
 
     @SerializedName("area")
     @Expose
@@ -23,11 +21,5 @@ class Employee {
     @Expose
     var territory: String? = null
 
-    override fun toString(): String {
-        return "Employee{" +
-                "area='" + area + '\''.toString() +
-                ", name='" + name + '\''.toString() +
-                ", territory='" + territory + '\''.toString() +
-                '}'.toString()
-    }
+
 }

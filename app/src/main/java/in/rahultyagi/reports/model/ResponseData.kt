@@ -8,8 +8,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 class ResponseData {
-    /*  @PrimaryKey(autoGenerate = true)
-    public int id;*/
+
     @PrimaryKey
     @SerializedName("country")
     @Expose
@@ -27,13 +26,5 @@ class ResponseData {
     @Expose
     var employee: List<Employee>? = null
 
-    override fun toString(): String {
-        return "ResponseData{" +
-                "country=" + country +
-                ", zone=" + zone +
-                ", region=" + region +
-                ", area=" + area +
-                ", employee=" + employee +
-                '}'.toString()
-    }
+
 }

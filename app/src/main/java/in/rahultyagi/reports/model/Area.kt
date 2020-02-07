@@ -9,9 +9,6 @@ import com.google.gson.annotations.SerializedName
 @Entity
 class Area {
 
-    /* @PrimaryKey(autoGenerate = true)
-   public int id;*/
-
     @PrimaryKey
     @SerializedName("area")
     @Expose
@@ -20,10 +17,4 @@ class Area {
     @Expose
     var territory = ""
 
-    override fun toString(): String {
-        return "Area{" +
-                "area='" + area + '\''.toString() +
-                ", territory='" + territory + '\''.toString() +
-                '}'.toString()
-    }
 }
